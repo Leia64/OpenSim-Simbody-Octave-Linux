@@ -1,8 +1,0 @@
-[submodule "simbody-core"]
-	path = simbody-core
-	url = https://github.com/antoinefalisse/simbody.git
-	branch = Common-Simulation-Linux
-[submodule "opensim-core"]
-	path = opensim-core
-	url = https://github.com/gilserrancoli/opensim-core.git
-	branch = Common-Simulation-Linux
