@@ -48,6 +48,9 @@ gcc -fPIC -shared -O3 f_bothcompartments.c -o "${TARGET_DIR}/${NEW_LIB_NAME_1}"
 echo "[INFO] Compiling ${NEW_LIB_NAME_2}..."
 gcc -fPIC -shared -O3 f_bothcompartments_d.c -o "${TARGET_DIR}/${NEW_LIB_NAME_2}"
 
+echo "[INFO] Cleaning up temporary .c files..."
+rm -f f_bothcompartments.c f_bothcompartments_d.c
+
 echo "========================================="
 echo " Both libraries successfully built"
 echo " Lib 1: ${TARGET_DIR}/${NEW_LIB_NAME_1}"
