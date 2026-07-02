@@ -36,7 +36,7 @@ fi
 
 cd "$SRC_M_DIR"
 echo "[INFO] Running ${SCRIPT_M_NAME}..."
-octave --no-gui "$SCRIPT_M_NAME"
+octave --no-gui "${SCRIPT_M_NAME}"
 
 echo "========================================="
 echo " 2. Direct Compilation with GCC         "
