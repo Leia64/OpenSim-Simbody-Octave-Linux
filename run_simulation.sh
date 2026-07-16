@@ -1,4 +1,14 @@
 #!/bin/bash
+
+#SBATCH -q gp_resb
+#SBATCH -A upc120
+#SBATCH -t 18:00:00
+#SBATCH -n 1
+#SBATCH -c 40
+#SBATCH --exclusive
+#SBATCH --mail-type=all
+#SBATCH --mail-user=leia.daragnes@upc.edu
+
 set -e
 
 # =============================================================================
@@ -40,6 +50,7 @@ fi
 
 # Export variables so Octave can read them from the environment
 export nfacesTib nfacesFem radForPairs kmaxpen_mode kCheckContacts kpress
+export OMP_NUM_THREADS=112
 
 cd "$TARGET_DIR"
 

@@ -68,6 +68,7 @@ cd "$SRC_M_DIR"
 echo "[INFO] Running ${SCRIPT_M_NAME} with current parameters..."
 echo "[INFO] Parameters: Tib=${nfacesTib}, Fem=${nfacesFem}, rad=${radForPairs}, kmax=${kmaxpen_mode}, kCheck=${kCheckContacts}, kpress=${kpress}"
 
+export LD_LIBRARY_PATH=$HOME/CasADi:$LD_LIBRARY_PATH
 octave --no-gui "${SCRIPT_M_NAME}"
 
 echo "========================================="
