@@ -14,8 +14,8 @@ set -e
 # =============================================================================
 # Argument Parsing
 # =============================================================================
-nfacesTib=75
-nfacesFem=258
+nfacesTib=100
+nfacesFem=342
 radForPairs="1"
 kmaxpen_mode="1e4"
 kCheckContacts="1e2"
@@ -40,25 +40,17 @@ done
 # Path Configurations
 # =============================================================================
 BASE_DIR="$(pwd)"
+SRC_M_DIR="${BASE_DIR}/meshes_withAD/contactsKneeProsthesis/"
+SCRIPT_M_NAME="Visualization_Forces_movement_raycastingv3.m"
 TARGET_DIR="${BASE_DIR}/meshes_withAD/gaitWithKneeProsthesis/trackingSimulations_3D/OCP_GC"
 SCRIPT_NAME="RunAllSimulations.m"
 
-if [ ! -d "$TARGET_DIR" ]; then
-    echo "[ERROR] The directory $TARGET_DIR does not exist."
-    exit 1
-fi
-
-# Export variables so Octave can read them from the environment
-export nfacesTib nfacesFem radForPairs kmaxpen_mode kCheckContacts kpress
-export OMP_NUM_THREADS=112
-
-cd "$TARGET_DIR"
-
+# =============================================================================
+# Visualisation
+# =============================================================================
 echo "========================================="
-echo " Launching Simulation (OCP_GC)           "
+echo " 1. Running Visualisation"
 echo "========================================="
-echo "[INFO] Working Directory: $TARGET_DIR"
-echo "[INFO] Running script:    $SCRIPT_NAME"
 echo "[INFO] Forwarded Parameters:"
 echo "       nfacesTib      = $nfacesTib"
 echo "       nfacesFem      = $nfacesFem"
@@ -67,6 +59,40 @@ echo "       kmaxpen_mode   = $kmaxpen_mode"
 echo "       kCheckContacts = $kCheckContacts"
 echo "       kpress         = $kpress"
 echo "========================================="
+
+if [ ! -f "${SRC_M_DIR}/${SCRIPT_M_NAME}" ]; then
+    echo "[ERROR] The file ${SCRIPT_M_NAME} could not be found."
+    exit 1
+fi
+
+#cd "$SRC_M_DIR"
+
+#export nfacesTib nfacesFem radForPairs kmaxpen_mode kCheckContacts kpress
+#export OMP_NUM_THREADS=40
+#export LD_LIBRARY_PATH=$HOME/CasADi:$LD_LIBRARY_PATH
+
+#octave --no-gui "${SCRIPT_M_NAME}"
+
+echo "========================================="
+echo " Both libraries CasADi successfully built     "
+echo "========================================="
+
+# =============================================================================
+# Simulation
+# =============================================================================
+echo "========================================="
+echo " 2. Running the Simulation       "
+echo "========================================="
+
+if [ ! -d "$TARGET_DIR" ]; then
+    echo "[ERROR] The directory $TARGET_DIR does not exist."
+    exit 1
+fi
+
+cd "$TARGET_DIR"
+
+export nfacesTib nfacesFem radForPairs kmaxpen_mode kCheckContacts kpress
+export OMP_NUM_THREADS=40
 
 octave --no-gui "$SCRIPT_NAME"
 

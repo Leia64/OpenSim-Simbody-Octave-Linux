@@ -2,3 +2,4 @@ foo_jac.c
 opensim-build/
 install/
 simbody-build/
+*.tar.gz
